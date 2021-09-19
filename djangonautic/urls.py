@@ -1,23 +1,23 @@
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.urls.conf import path, include
 from . import views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 from django.conf import settings
 from articles import views as article_views
-from articles.viewset_api import *
-from rest_framework import routers
-
-router = routers.DefaultRouter()
-router.register('Article', kelompokviewset)
+from api.views import TestView
+from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
-    url(r'^api/', include(router.urls)),
-    url(r'^admin/', admin.site.urls),
-    url(r'^articles/', include('articles.urls')),
-    url(r'^accounts/', include('accounts.urls')),
-    url(r'^about/$', views.about),
-    url(r'^$', article_views.article_list, name="home"),
+    path('admin/', admin.site.urls),
+    path('rest-auth/', include('rest_auth.urls')),
+    path('articles/', include('articles.urls')),
+    path('accounts/', include('accounts.urls')),
+    path('about/', views.about),
+    path('', article_views.article_list, name="home"),
+    path('api/', TestView.as_view(), name='test'),
+    path('api/token/', obtain_auth_token, name='obtain-name'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
