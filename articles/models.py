@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class Article(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField()
-    body = models.TextField()
+    body = models.TextField(max_length=200)
     date = models.DateTimeField(auto_now_add=True)
     thumb = models.ImageField(default='default.png', blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
