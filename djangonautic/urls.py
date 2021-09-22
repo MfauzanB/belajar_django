@@ -6,7 +6,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 from django.conf import settings
 from articles import views as article_views
-from api.views import TestView
+from api.views import PostView, PostCreateView, PostListCreateView
 from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
@@ -16,7 +16,9 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('about/', views.about),
     path('', article_views.article_list, name="home"),
-    path('api/', TestView.as_view(), name='test'),
+    path('api/', PostView.as_view(), name='test'),
+    path('create/', PostCreateView.as_view(), name='create'),
+    path('create-list/', PostListCreateView.as_view(), name='create-list'),
     path('api/token/', obtain_auth_token, name='obtain-name'),
 ]
 
