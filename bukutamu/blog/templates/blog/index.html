@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+	{{page_title}}
+{% endblock page_title %}
+
+
+{% block contents %}
+	<h1>{{page_title}}</h1>
+	{% for post in posts  %}
+		<!-- <h1>{{post.nama}}</h1>
+		<p>{{post.pesan}}</p>
+		<div class="card-footer text-muted">
+			Updated on {{post.date}}
+		</div> -->
+	<table border="1">
+    <tr>
+		<td>{{post.id}}</td>
+        <td>{{post.nama}}</td>
+        <td>{{post.pesan}}</td>
+        <td><div class="card-footer text-muted">
+			Updated on {{post.date}}
+		</div></td>
+    </tr>
+	</table>
+	{% endfor %}
+	<a href="create/">Buat Pesan Lagi</a>
+{% endblock contents %}
